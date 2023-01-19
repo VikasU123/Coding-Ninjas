@@ -1,0 +1,78 @@
+/*
+Code : Diamond of stars
+Send Feedback
+Print the following pattern for the given number of rows.
+Note: N is always odd.
+
+
+Pattern for N = 5
+
+
+
+The dots represent spaces.
+
+
+
+Input format :
+N (Total no. of rows and can only be odd)
+Output format :
+Pattern in N lines
+Constraints :
+1 <= N <= 49
+Sample Input 1:
+5
+Sample Output 1:
+  *
+ ***
+*****
+ ***
+  *
+Sample Input 2:
+3
+Sample Output 2:
+  *
+ ***
+  *
+*/
+
+import java.util.*;
+public class Solution {
+    
+    public static void main(String[] args) {
+        // Write your code here
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int n1=(N+1)/2;
+        int n2=n1-1;
+        int i=1;
+        while(i<=n1){
+            int j=1;
+            while(j<=n1-i){
+                System.out.print(" ");
+                j=j+1;
+            }
+            int k=1;
+            while(k<=((2*i)-1)){
+                System.out.print('*');
+                k=k+1;
+            }
+            System.out.println();
+            i=i+1;
+        }
+        int a=n2;
+        while(a>=1){
+            int b=1;
+            while(b<=n2-a+1){
+                System.out.print(" ");
+                b=b+1;
+            }
+            int c=1;
+            while(c<=((2*a)-1)){
+                System.out.print('*');
+                c=c+1;
+            }
+            System.out.println();
+            a=a-1;
+        }
+    }
+}
