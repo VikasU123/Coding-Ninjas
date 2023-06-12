@@ -1,0 +1,119 @@
+// Strange island
+// A popular tourist destination country is situated on a breathtakingly beautiful archipelago constantly bathed by the sun. The country's residents are very proud of their numerous islands. However, global warming has them very worried: raising sea levels are resulting in rapidly increasing loss of dry land, which is diminishing the beauty of the archipelago.
+// The map of the archipelago is represented by a grid of R by C squares (characters). The character 'X' (uppercase letter x) represents dry land, while '.' (period) represents sea. It has been estimated that, in fifty years, sea will have flooded every square of land that is currently surrounded by sea on three or on all four sides (north, south, east, west). Assume that all squares outside the map (along the edges) are covered by sea.
+// Your task is computing the map of the archipelago in fifty years (after the described sea level rise).
+// Since there will probably be less land than today, you shouldn't print out the whole map, but only its smallest rectangular part that contains all land squares. It is guaranteed that at least one square of land will remain in all test cases.
+// Input Format:
+// The first line of input contains two positive integers, R and C, the dimensions of the current map.
+// Each of the following R lines contains C characters. These R by C characters represent the current map of the archipelago.
+// Constraints:
+// 1 ≤ R, C ≤ 10
+// Time limit: 1 sec
+// Output Format:
+// The output must contain an appropriate number of lines representing the required rectangular part of the future (flooded) map.
+// Sample Input 1:
+// 5 3
+// ...
+// .X.
+// .X.
+// .X.
+// ...
+// Sample Output 1:
+// X
+// Sample Input 2:
+// 3 10
+// ..........
+// ..XXX.XXX.
+// XXX....... 
+// Sample Output 2:
+// .XX...X
+// XX.....
+
+
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		/*
+		 * Your class should be named Main.
+		 * Read input as specified in the question.
+		 * Print output as specified in the question.
+		 */
+
+		// Write your code here
+		Scanner sc = new Scanner(System.in);
+		int row = sc.nextInt();
+		int col = sc.nextInt();
+		char[][] map = new char[row][col];
+		for (int i = 0; i < row; i++) {
+			String s=sc.next();
+			for (int j = 0; j < col; j++) {
+				map[i][j] = s.charAt(j);
+			}
+			System.out.println();
+		}
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				int count = 0;
+				if (map[i][j] == 'X') {
+					if (i - 1 < 0 || map[i - 1][j] == '.') {
+						count++;
+					}
+					if (i + 1 >= row || map[i + 1][j] == '.') {
+						count++;
+					}
+					if (j - 1 < 0 || map[i][j - 1] == '.') {
+						count++;
+					}
+					if (j + 1 >= col || map[i][j + 1] == '.') {
+						count++;
+					}
+					if (count >= 3) {
+						map[i][j] = '1';
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				if (map[i][j] == '1') {
+					map[i][j] = '.';
+				}
+			}
+		}
+
+		int minRow = Integer.MAX_VALUE;
+		int maxRow = Integer.MIN_VALUE;
+		int minCol = Integer.MAX_VALUE;
+		int maxCol = Integer.MIN_VALUE;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				if (map[i][j] == 'X') {
+					if (minRow > i) {
+						minRow = i;
+					}
+					if (maxRow < i) {
+						maxRow = i;
+					}
+					if (minCol > j) {
+						minCol = j;
+					}
+					if (maxCol < j) {
+						maxCol = j;
+					}
+				}
+			}
+		}
+		//System.out.println(minRow + " " + maxRow + "\n" + minCol + " " + maxCol);
+		for (int i = minRow; i < maxRow + 1; i++) {
+			for (int j = minCol; j < maxCol + 1; j++) {
+				System.out.print(map[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
+}
